@@ -17,21 +17,34 @@ class CreateStationHandler
     }
 
     public function execute(CreateStationCommand $command){
-        /** @var Zone $zone */
-        $zone = $this->zoneRepository->findById($command->getZoneId());
+        if($command->getZoneId() != null ){
+            /** @var Zone $zone */
+            $zone = $this->zoneRepository->findById($command->getZoneId());
 
-        if($zone == null){
-            throw new \Exception("Zone not found.");
+            if($zone == null){
+                throw new \Exception("Zone not found.");
+            }
+
+            $station = new Station();
+            $station->setName($command->getName());
+            $station->setLat($command->getLat());
+            $station->setLng($command->getLng());
+            $station->setElevation($command->getElevation());
+            $station->setZone($zone);
+
+            $this->stationRepository->save($station);
+
+        }else{
+
+            $station = new Station();
+            $station->setPrice($command->getPrice());
+            $station->setName($command->getName());
+            $station->setLat($command->getLat());
+            $station->setLng($command->getLng());
+            $station->setElevation($command->getElevation());
+
+            $this->stationRepository->save($station);
         }
 
-        $station = new Station();
-        $station->setPrice($command->getPrice());
-        $station->setName($command->getName());
-        $station->setLat($command->getLat());
-        $station->setLng($command->getLng());
-        $station->setElevation($command->getElevation());
-        $station->setZone($zone);
-
-        $this->stationRepository->save($station);
     }
 }

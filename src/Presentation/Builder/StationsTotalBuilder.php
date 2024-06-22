@@ -14,8 +14,11 @@ class StationsTotalBuilder
         $model = new StationsTotalModel();
         $model->setId($directionStation->getStation()->getId());
         $model->setName($directionStation->getStation()->getName());
-        $model->setZone($directionStation->getStation()->getZone()->getNumber());
-        $model->setPrice($directionStation->getStation()->getPrice());
+        if($directionStation->getStation()->getZone() != null){
+            $model->setZone($directionStation->getStation()->getZone()->getNumber());
+        }else{
+            $model->setPrice($directionStation->getStation()->getPrice());
+        }
 
         $positionModel = new PositionStationModel();
         $positionModel->setLat($directionStation->getStation()->getLat());

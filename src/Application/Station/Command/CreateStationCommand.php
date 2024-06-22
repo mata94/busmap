@@ -27,12 +27,12 @@ class CreateStationCommand
     /**
      * @Serializer\Type("float")
      */
-    private float $price;
+    private ?float $price;
 
     /**
      * @Serializer\Type("int")
      */
-    private int $zoneId;
+    private ?int $zoneId;
 
     public function getName(): string
     {
@@ -74,22 +74,22 @@ class CreateStationCommand
         $this->elevation = $elevation;
     }
 
-    public function getPrice(): float
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(float $price): void
+    public function setPrice(?float $price): void
     {
         $this->price = $price;
     }
 
-    public function getZoneId(): int
+    public function getZoneId(): ?int
     {
         return $this->zoneId;
     }
 
-    public function setZoneId(int $zoneId): void
+    public function setZoneId(?int $zoneId): void
     {
         $this->zoneId = $zoneId;
     }
