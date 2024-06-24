@@ -12,12 +12,16 @@ class StationsTotalBuilder
     public function makeSingle(DirectionStation $directionStation){
 
         $model = new StationsTotalModel();
+
         $model->setId($directionStation->getStation()->getId());
         $model->setName($directionStation->getStation()->getName());
+        
         if($directionStation->getStation()->getZone() != null){
             $model->setZone($directionStation->getStation()->getZone()->getNumber());
         }else{
-            $model->setPrice($directionStation->getStation()->getPrice());
+            if($directionStation->getStation()->getPrice() != null){
+                $model->setPrice($directionStation->getStation()->getPrice());
+            }
         }
 
         $positionModel = new PositionStationModel();
@@ -28,7 +32,6 @@ class StationsTotalBuilder
         $model->setPosition($positionModel);
 
         return $model;
-
     }
 
     public function makeCollection(array $collection){
